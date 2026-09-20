@@ -1,0 +1,8 @@
+include README.md CHANGELOG.md LICENSE THIRD-PARTY-NOTICES.md CONTRIBUTING.md SECURITY.md AGENTS.md bootstrap.py
+recursive-include LICENSES *
+recursive-include docs *.md
+recursive-include proto *.proto
+recursive-include scripts *.py
+recursive-include desktop *.py *.swift *.spec *.txt
+recursive-include tests *.py
+global-exclude __pycache__ *.py[cod] .DS_Store

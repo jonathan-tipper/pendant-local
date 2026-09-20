@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151d">
+  <title>Pendant · Personal workspace</title>
+  <link rel="stylesheet" href="/ui/style.css">
+  <script src="/ui/app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to workspace</a>
+<div id="login-view" class="login-view">
+  <section class="login-card" aria-labelledby="login-title">
+    <div class="brand-symbol" aria-hidden="true">p</div>
+    <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+    <h1 id="login-title">Welcome to Pendant.</h1>
+    <p class="muted">Your device, recordings and transcripts, managed on your computer.</p>
+    <form id="login-form">
+      <label for="api-token">Local access token</label>
+      <input id="api-token" name="token" type="password" autocomplete="off" required spellcheck="false" placeholder="Paste your access token">
+      <p class="field-help">Find it by running <code>pendant-local token</code> in your terminal.</p>
+      <button type="submit" class="button primary wide" id="login-button">Open workspace <span aria-hidden="true">↗</span></button>
+      <p id="login-error" class="form-error" role="alert"></p>
+    </form>
+    <div class="login-foot"><span class="status-dot"></span> Local access · Token kept for this tab only</div>
+  </section>
+</div>
+<div id="workspace" class="workspace" hidden>
+  <aside class="sidebar" aria-label="Workspace navigation">
+    <a class="brand" href="#recordings"><span class="brand-symbol small" aria-hidden="true">p</span><span>pendant<span class="brand-sub">PERSONAL WORKSPACE</span></span></a>
+    <nav class="main-nav" aria-label="Main">
+      <button data-view="recordings" class="nav-item active" aria-current="page"><span class="icon" data-icon="library"></span><span>Recordings</span><span id="nav-count" class="nav-count">0</span></button>
+      <button data-view="device" class="nav-item"><span class="icon" data-icon="device"></span><span>Device</span></button>
+      <button data-view="workflow" class="nav-item"><span class="icon" data-icon="workflow"></span><span>Workflow</span><span id="queue-count" class="nav-count" hidden></span></button>
+      <button data-view="settings" class="nav-item"><span class="icon" data-icon="settings"></span><span>Settings</span></button>
+    </nav>
+    <div class="sidebar-bottom"><div class="local-label"><span class="status-dot"></span><span>LOCAL WORKSPACE</span></div><p>Your audio stays here.<br>Transcription runs locally.</p><button id="lock-button" class="text-button"><span class="icon" data-icon="lock"></span>Lock workspace</button></div>
+  </aside>
+  <main id="main-content" class="main-content" tabindex="-1">
+    <header class="topbar"><div><p class="eyebrow">PERSONAL AUDIO</p><h1 id="view-title">Recordings</h1></div><div class="top-actions"><span id="device-badge" class="badge neutral"><span class="status-dot"></span>Device not checked</span><button id="refresh-button" class="icon-button" aria-label="Refresh workspace" title="Refresh workspace"><span class="icon" data-icon="refresh"></span></button><button id="import-button" class="button primary"><span class="icon" data-icon="plus"></span>Import audio</button></div></header>
+    <div id="global-alert" class="global-alert" role="alert" hidden></div>
+    <section id="view-recordings" class="view recording-view" aria-label="Recording library">
+      <div class="library-panel">
+        <div class="library-tools"><label class="search-field"><span class="icon" data-icon="search"></span><span class="sr-only">Search titles and transcripts</span><input type="search" id="recording-search" placeholder="Search your recordings…" autocomplete="off"><kbd>/</kbd></label><div class="filter-line"><div class="filter-tabs" role="group" aria-label="Filter recordings"><button class="filter active" data-filter="all" aria-pressed="true">All</button><button class="filter" data-filter="starred" aria-pressed="false">Starred</button><button class="filter" data-filter="archived" aria-pressed="false">Archived</button></div><span id="library-count" class="quiet-count">0 recordings</span></div></div>
+        <div id="recording-list" class="recording-list" aria-label="Recordings"></div>
+        <div class="library-foot"><span class="icon" data-icon="storage"></span><span id="library-foot-text">Stored on this computer</span></div>
+      </div>
+      <article id="recording-detail" class="recording-detail" aria-label="Selected recording">
+        <div class="empty-detail"><div class="empty-icon" data-icon="audio"></div><p class="eyebrow">A LITTLE LESS TO REMEMBER</p><h2>Your recordings, in one place.</h2><p>Import an audio file or sync your Pendant.<br>Listen, transcribe and keep what matters.</p><div class="empty-actions"><button class="button primary" data-action="import">Import your first recording</button><button class="button secondary" data-action="device">Set up your Pendant</button></div><div class="empty-trust"><span class="icon" data-icon="lock"></span> Local storage. Your choice of transcription model.</div></div>
+      </article>
+    </section>
+    <section id="view-device" class="view page-view" aria-label="Device management" hidden>
+      <div class="page-intro"><h2>Your Pendant</h2><p>Connect over Bluetooth, bring recordings into your library and manage recording controls.</p></div>
+      <div class="cards-grid">
+        <section class="card device-card"><div class="section-heading"><h3>Connection</h3><span id="connection-state" class="badge neutral">Not checked</span></div>
+          <div class="pendant-appearance">
+            <div id="pendant-preview" class="pendant-preview" data-colour="black" role="img" aria-label="Black Limitless Pendant illustration">
+              <!-- Original vector illustration, informed by Ammunition's Limitless Pendant design reference. -->
+              <svg viewBox="0 0 240 238" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="pendant-clip-finish" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" class="pendant-stop-edge"/><stop offset=".2" class="pendant-stop-light"/><stop offset=".72" class="pendant-stop-mid"/><stop offset="1" class="pendant-stop-edge"/>
+                  </linearGradient>
+                  <linearGradient id="pendant-body-finish" x1=".15" y1="0" x2=".85" y2="1">
+                    <stop offset="0" class="pendant-stop-light"/><stop offset=".42" class="pendant-stop-mid"/><stop offset=".76" class="pendant-stop-tone"/><stop offset="1" class="pendant-stop-edge"/>
+                  </linearGradient>
+                  <radialGradient id="pendant-face-light" cx=".35" cy=".28" r=".75">
+                    <stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset=".72" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".24"/>
+                  </radialGradient>
+                  <pattern id="pendant-metal-grain" width="3" height="3" patternUnits="userSpaceOnUse">
+                    <path d="M0 .5H3" stroke="#fff" stroke-opacity=".035" stroke-width=".5"/>
+                  </pattern>
+                </defs>
+                <ellipse cx="120" cy="219" rx="52" ry="5" fill="#000" opacity=".16"/>
+                <path d="M91 40Q91 30 101 30H139Q149 30 149 40V66Q149 85 162 97H78Q91 85 91 66Z" fill="url(#pendant-clip-finish)" class="pendant-outline"/>
+                <path d="M94 66V40Q94 33 101 33H139Q146 33 146 40" fill="none" stroke="#fff" stroke-opacity=".12"/>
+                <rect x="186" y="128" width="6" height="27" rx="3" class="pendant-side-button"/>
+                <circle cx="120" cy="145" r="70" fill="url(#pendant-body-finish)" class="pendant-outline"/>
+                <circle cx="120" cy="145" r="68.5" fill="url(#pendant-face-light)"/>
+                <circle cx="120" cy="145" r="68" fill="url(#pendant-metal-grain)"/>
+                <path d="M53 145A67 67 0 0 1 187 145" fill="none" stroke="#fff" stroke-opacity=".13"/>
+                <g class="pendant-microphones" fill="none" stroke-linecap="round" stroke-dasharray=".1 2.8" stroke-width="1.4">
+                  <path d="M63 126A60 60 0 0 1 177 126"/>
+                  <path d="M66 127A57 57 0 0 1 174 127"/>
+                  <path d="M69 128A54 54 0 0 1 171 128"/>
+                </g>
+                <circle cx="120" cy="145" r="2.5" class="pendant-indicator-rim"/>
+                <circle cx="120" cy="145" r="1.5" class="pendant-indicator"/>
+              </svg>
+            </div>
+            <fieldset class="pendant-colour-picker" aria-describedby="pendant-colour-note">
+              <legend>Pendant colour</legend>
+              <div class="pendant-colour-options">
+                <label class="pendant-colour-choice" data-colour="black"><input class="sr-only" type="radio" name="pendant-colour" value="black" data-label="Black" checked><span class="pendant-colour-chip"><span class="pendant-colour-dot" aria-hidden="true"></span>Black</span></label>
+                <label class="pendant-colour-choice" data-colour="white"><input class="sr-only" type="radio" name="pendant-colour" value="white" data-label="White"><span class="pendant-colour-chip"><span class="pendant-colour-dot" aria-hidden="true"></span>White</span></label>
+                <label class="pendant-colour-choice" data-colour="iridescent"><input class="sr-only" type="radio" name="pendant-colour" value="iridescent" data-label="Iridescent"><span class="pendant-colour-chip"><span class="pendant-colour-dot" aria-hidden="true"></span>Iridescent</span></label>
+              </div>
+              <p id="pendant-colour-note" class="field-help" aria-live="polite">Saved in this browser.</p>
+            </fieldset>
+          </div>
+          <div id="device-facts" class="device-facts"><p class="muted">Check your Pendant to see its current status.</p></div><div class="button-row"><button id="device-refresh" class="button primary">Check device</button><button id="device-scan" class="button secondary">Scan Bluetooth</button></div><div id="scan-results" class="scan-results"></div><form id="device-config-form" class="stack-form"><label for="device-address">Device address or UUID</label><div class="input-action"><input id="device-address" required autocomplete="off" placeholder="Select a scanned device or enter an address"><button class="button secondary" type="submit">Save device</button></div></form></section>
+        <section class="card"><div class="section-heading"><h3>Recording controls</h3><span class="icon" data-icon="audio"></span></div><p class="muted">These controls act on your physical Pendant. It needs to be nearby and available over Bluetooth.</p><div class="control-row"><div><strong>Device recording</strong><p id="recording-state">Status unknown</p></div><div class="button-row"><button id="start-recording" class="button secondary"><span class="record-dot"></span>Start</button><button id="stop-recording" class="button secondary">Stop</button></div></div><div class="control-row"><div><strong>Device clock</strong><p>Start synchronises the clock automatically. Use this before recording with the physical button.</p></div><button id="set-clock" class="button secondary">Set clock</button></div><div class="control-row key-row"><div><strong>Personal encryption key</strong><p>Use your local key for future recordings. Existing encrypted audio still needs its original key.</p></div><button id="provision-key" class="button secondary">Set up local key</button></div><p class="inline-note"><span class="icon" data-icon="info"></span>Key changes apply to future audio. Keep a secure backup of your local data directory.</p></section>
+        <section class="card span-two"><div class="section-heading"><div><h3>Sync recordings</h3><p class="muted">Download stored audio, decode it and add it to your library.</p></div><span class="badge good">Device deletion off</span></div><div class="sync-controls"><label for="capture-duration">Maximum sync time<select id="capture-duration"><option value="30">30 seconds</option><option value="60">1 minute</option><option value="180">3 minutes</option><option value="300">5 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option><option value="1800" selected>30 minutes</option><option value="3600">1 hour</option></select></label><button id="sync-button" class="button primary"><span class="icon" data-icon="download"></span>Sync from Pendant</button></div><p class="field-help">Original audio stays on the Pendant. The workspace does not erase it during sync.</p><p class="field-help">This is the maximum transfer time, not the length of your recordings. Transfers can finish sooner when no more data arrives. Each sync currently starts from the oldest stored pages, so use a longer limit to reach newer recordings. Your selection is remembered in this browser.</p><p id="sync-progress" class="field-help" role="timer" aria-live="off" hidden></p><div id="sync-status" class="operation-status" aria-live="polite"></div><div class="subsection-heading"><h4>Recent transfers</h4><button id="captures-refresh" class="text-button">Refresh</button></div><div id="capture-list" class="table-list"><p class="muted">No transfers loaded.</p></div></section>
+      </div>
+    </section>
+    <section id="view-workflow" class="view page-view" aria-label="Transcription workflow" hidden>
+      <div class="page-intro"><h2>From audio to something useful.</h2><p>Choose a local model, queue recordings and review the transcript when it’s finished.</p></div>
+      <div class="workflow-summary"><div><span class="step-number">01</span><strong>Capture</strong><p>Import or sync your audio</p></div><span class="step-arrow" aria-hidden="true">→</span><div><span class="step-number">02</span><strong>Transcribe</strong><p>Process locally on your computer</p></div><span class="step-arrow" aria-hidden="true">→</span><div><span class="step-number">03</span><strong>Review & export</strong><p>Keep notes and use your transcript</p></div></div>
+      <section class="card workflow-setup"><div class="section-heading"><div><h3>Ready to transcribe?</h3><p id="workflow-readiness" class="muted" role="status">Checking local setup…</p></div><button class="button secondary" data-action="settings">Choose a model</button></div><div id="workflow-model" class="inline-note"></div><div class="button-row"><button id="batch-transcribe" class="button primary">Queue untranscribed recordings</button><button class="button secondary" data-action="recordings">Choose one recording</button></div><p class="field-help">Queues up to 100 recordings at a time. Existing transcripts and archived recordings are skipped. Jobs run one at a time.</p><div id="batch-result" class="operation-status" role="status"></div></section>
+      <section class="card"><div class="section-heading"><div><h3>Transcription queue</h3><p id="queue-summary" class="muted">One local job runs at a time. New jobs wait here.</p></div><button id="jobs-refresh" class="button secondary"><span class="icon" data-icon="refresh"></span>Refresh</button></div><div id="job-list" class="table-list"></div></section>
+      <section class="card workflow-help"><div class="icon" data-icon="info"></div><div><h3>Review what the model heard.</h3><p>Open a finished recording, use its timestamps to listen, then export TXT, Markdown, SRT or JSON. Enable Identify speakers to add speaker labels. Review the labels by listening, then name speakers within each recording. Automatic summaries are not included.</p></div></section>
+    </section>
+    <section id="view-settings" class="view page-view settings-view" aria-label="Workspace settings" hidden>
+      <div class="page-intro"><h2>A workspace you control.</h2><p>Manage local transcription and understand where your data lives.</p></div>
+      <section class="card"><div class="section-heading"><div><h3>Local transcription</h3><p class="muted">Speech recognition runs on this computer using faster-whisper.</p></div><span id="transcription-badge" class="badge neutral">Checking</span></div><div id="transcription-info" class="inline-note"></div><div id="engine-install" hidden><p>Run this command in Terminal, then restart the service. It installs the engine without downloading speech models.</p><pre id="engine-command" class="install-command"></pre><button id="copy-engine-command" class="button secondary" type="button">Copy installation command</button></div><form id="preferences-form" class="preferences-grid"><label for="model-select">Default model<select id="model-select"><option value="base.en">Whisper Base · English</option></select></label><label for="language-select">Language<select id="language-select"><option value="">Detect automatically</option><option value="en">English</option><option value="fr">French</option><option value="es">Spanish</option><option value="de">German</option><option value="zh">Chinese</option><option value="tl">Tagalog</option><option value="it">Italian</option><option value="pt">Portuguese</option></select></label><label class="checkbox-label" for="default-diarize"><input id="default-diarize" type="checkbox"><span>Identify speakers by default<span class="field-help">Apply local speaker analysis to future transcription jobs, including batches and automatic imports. Existing transcripts stay unchanged.</span></span></label><label class="checkbox-label" for="auto-transcribe"><input id="auto-transcribe" type="checkbox"><span>Automatically transcribe new recordings<span class="field-help">Queue imports and decoded Pendant audio using these preferences. The selected model must already be downloaded.</span></span></label><div class="button-row"><button class="button secondary" type="submit">Save preferences</button><button id="prepare-model" class="button primary" type="button"><span class="icon" data-icon="download"></span>Download selected model</button></div></form><p class="field-help">Downloading a model needs an internet connection and disk space. Your recordings are not sent to the model provider.</p><section class="speaker-setup" aria-labelledby="speaker-heading"><div class="section-heading"><h4 id="speaker-heading">Speaker analysis</h4><span id="speaker-badge" class="badge neutral">Checking</span></div><p>Separate voices into Speaker 1, Speaker 2 and so on, then add names. Analysis runs locally using sherpa-onnx, pyannote segmentation and WeSpeaker. Names are saved per recording.</p><p class="field-help">Automatic counts and labels can be wrong, especially with brief speech, similar voices or people talking together. Choose a known speaker count on a recording when needed. Existing transcripts need transcribing again to add labels.</p><div id="speaker-engine-install" hidden><p>Install the speaker engine in Terminal, then restart the service. This does not download model files.</p><pre id="speaker-engine-command" class="install-command"></pre><button id="copy-speaker-command" class="button secondary" type="button">Copy speaker engine command</button></div><button id="prepare-speakers" class="button secondary" type="button">Download speaker models · 34 MB</button></section><div class="subsection-heading"><h4>Model library</h4><span class="field-help">One-time downloads · approximate sizes</span></div><div id="model-list" class="model-grid"></div></section>
+      <section class="card"><div class="section-heading"><h3>Storage & access</h3><span class="icon" data-icon="lock"></span></div><dl id="storage-facts" class="facts-list"></dl><p class="inline-note">The workspace has no cloud account or automatic cloud sync. Keep a backup of your audio, transcripts and encryption keys.</p><div class="button-row"><a class="button secondary" href="/docs" target="_blank" rel="noopener">API documentation <span aria-hidden="true">↗</span></a><button id="settings-lock" class="button secondary">Lock workspace</button></div></section>
+    </section>
+  </main>
+</div>
+<input id="audio-import" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.opus,.flac,.webm" multiple hidden>
+<dialog id="confirm-dialog"><form method="dialog"><div class="dialog-icon" data-icon="info"></div><h2 id="confirm-title">Confirm action</h2><p id="confirm-description"></p><div class="button-row"><button class="button secondary" value="cancel">Cancel</button><button id="confirm-submit" class="button primary" value="confirm">Confirm</button></div></form></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

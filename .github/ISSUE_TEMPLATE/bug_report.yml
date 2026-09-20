@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible software or hardware problem.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Never attach tokens, keys, databases, raw captures or personal audio/transcripts.
+        Redact device addresses, serial numbers, account names and paths.
+        Use SECURITY.md for sensitive vulnerability reports.
+  - type: input
+    id: version
+    attributes:
+      label: Application version or commit
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS/version, CPU, Python version, launch method and Pendant firmware if known.
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence
+    attributes:
+      label: What was involved?
+      options:
+        - Physical Pendant
+        - Imported audio
+        - Synthetic test or no audio
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps, expected result and actual result
+      description: Include redacted error text and whether playback/Start/Stop were checked.
+    validations:
+      required: true
