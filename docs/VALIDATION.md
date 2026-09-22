@@ -15,6 +15,8 @@ all repository branches without detecting secrets.
 These checks used temporary synthetic data. No device, recording workspace,
 model inference or native app build was involved. `.gitattributes` fixes text
 line endings to LF so bundled asset hashes also remain valid on Windows.
+Capture listings use forward slashes so their file references can be requested
+through the download API on every operating system.
 
 The [v0.5.0 release notes](https://github.com/jonathan-tipper/pendant-local/releases/tag/v0.5.0)
 record the final hosted CI and package checks. [GitHub Actions](https://github.com/jonathan-tipper/pendant-local/actions)
