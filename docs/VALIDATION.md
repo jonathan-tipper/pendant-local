@@ -3,7 +3,25 @@
 Version **0.5.0**. This page distinguishes software checks from physical hardware
 evidence. It does not promise compatibility with every Pendant or operating system.
 
-## Current source checks
+## Release checks: 22 September 2026
+
+The v0.5.0 release candidate passed **195 tests with 1 FFmpeg-dependent skip**
+on Apple Silicon macOS with Python 3.13.2 in a fresh core/test environment.
+The 2 upstream test-client deprecation warnings remain. JavaScript syntax,
+source/link/asset checks and dependency consistency passed. A fresh pip-audit
+reported no known vulnerabilities in that installed environment. Gitleaks scanned
+all repository branches without detecting secrets.
+
+These checks used temporary synthetic data. No device, recording workspace,
+model inference or native app build was involved. `.gitattributes` fixes text
+line endings to LF so bundled asset hashes also remain valid on Windows.
+
+The [v0.5.0 release notes](https://github.com/jonathan-tipper/pendant-local/releases/tag/v0.5.0)
+record the final hosted CI and package checks. [GitHub Actions](https://github.com/jonathan-tipper/pendant-local/actions)
+is the live record for later commits. Passing software CI does not establish
+Bluetooth support or the desktop application's permission path on that platform.
+
+## Source preparation: 20 September 2026
 
 Public source preparation, 20 September 2026, on Apple Silicon macOS 26.6.2
 with Python 3.13.2:
