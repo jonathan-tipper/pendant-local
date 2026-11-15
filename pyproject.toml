@@ -12,10 +12,16 @@ requires-python = ">=3.11"
 license = "MIT"
 dependencies = [
   "fastapi==0.141.1", "uvicorn==0.53.0", "bleak==3.0.2",
-  "cryptography==50.0.1", "protobuf==7.36.1", "click==8.5.0",
-  "httpx==0.28.1", "platformdirs==4.11.8", "filelock>=3.16,<5",
+  "cryptography==50.0.1", "protobuf==7.36.2", "click==8.5.0",
+  "httpx==0.28.1", "platformdirs==4.11.8", "filelock>=4.2.1,<5",
   "python-multipart==0.0.32",
 ]
+
+[project.urls]
+Homepage = "https://github.com/jonathan-tipper/pendant-local"
+Documentation = "https://github.com/jonathan-tipper/pendant-local#readme"
+Issues = "https://github.com/jonathan-tipper/pendant-local/issues"
+Releases = "https://github.com/jonathan-tipper/pendant-local/releases"
 
 [project.optional-dependencies]
 dev = ["pytest==9.1.1", "pytest-asyncio==1.4.0"]

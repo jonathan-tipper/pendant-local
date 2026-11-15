@@ -260,7 +260,12 @@ def test_files_stay_inside_capture_and_include_decoded_audio(client, settings):
     base = f"/v1/captures/{capture_id}/files/"
     assert client.get(base + "capture.bin").content == b"preserved audio"
     assert client.get(base + "audio/recording-0001.opus").content == b"OggS fake test bytes"
-    assert "audio/recording-0001.opus" in client.get(f"/v1/captures/{capture_id}").json()["files"]
+    listed = client.get(f"/v1/captures/{capture_id}").json()["files"]
+    assert "audio/recording-0001.opus" in listed
+    assert all("\\" not in name for name in listed)
+    for name in listed:
+        assert client.get(base + name).status_code == 200
+    assert client.get("/v1/captures").json()["captures"][0]["files"] == listed
     for path in ["private.pem", "missing.opus", "%2e%2e%2fconfig.json", "audio/%2e%2e/%2e%2e/config.json"]:
         assert client.get(base + path).status_code == 404
 
