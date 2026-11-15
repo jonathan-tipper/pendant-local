@@ -17,6 +17,12 @@ dependencies = [
   "python-multipart==0.0.32",
 ]
 
+[project.urls]
+Homepage = "https://github.com/jonathan-tipper/pendant-local"
+Documentation = "https://github.com/jonathan-tipper/pendant-local#readme"
+Issues = "https://github.com/jonathan-tipper/pendant-local/issues"
+Releases = "https://github.com/jonathan-tipper/pendant-local/releases"
+
 [project.optional-dependencies]
 dev = ["pytest==9.1.1", "pytest-asyncio==1.4.0"]
 protocol = ["grpcio-tools==1.84.0"]
