@@ -27,13 +27,23 @@ encrypted by this application**. Read the [security model](SECURITY.md).
 
 ## Quick start
 
+[Download v0.5.0](https://github.com/jonathan-tipper/pendant-local/releases/tag/v0.5.0)
+for the source ZIP and Python package. The source ZIP includes bootstrap and Mac
+build instructions; no prebuilt Mac app or model weights are included.
+
 You need Python **3.11 or newer**, a local Bluetooth adapter and a nearby Pendant.
 macOS has physical-device evidence with firmware **1.1.20**. Linux has software
 validation; Windows and other firmware need community testing. See the
 [compatibility and validation notes](docs/VALIDATION.md).
 
-Download this repository as a ZIP and extract it, or clone it. Open a terminal
-in the extracted repository folder, then run:
+Download and extract the release source ZIP. Alternatively, clone the release:
+
+```bash
+git clone --branch v0.5.0 --depth 1 https://github.com/jonathan-tipper/pendant-local.git
+cd pendant-local
+```
+
+Open a terminal in the extracted or cloned repository folder, then run:
 
 ```bash
 python3 bootstrap.py

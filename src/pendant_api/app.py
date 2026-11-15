@@ -130,7 +130,7 @@ def create_app(settings: Settings | None = None, device_backend=None, capture_ba
         audio = path / "audio"
         if audio.is_dir() and not audio.is_symlink():
             files.extend(audio.iterdir())
-        job["files"] = sorted(str(p.relative_to(path)) for p in files if p.is_file() and not p.is_symlink() and p.suffix in {".bin", ".json", ".jsonl", ".opus", ".wav"})
+        job["files"] = sorted(p.relative_to(path).as_posix() for p in files if p.is_file() and not p.is_symlink() and p.suffix in {".bin", ".json", ".jsonl", ".opus", ".wav"})
         return job
 
     @app.get("/", include_in_schema=False)

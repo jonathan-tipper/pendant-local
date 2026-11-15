@@ -38,29 +38,33 @@ Update [VALIDATION.md](VALIDATION.md) with the exact checks performed. Record
 hardware, native UI and inference evidence separately from mocked tests. Keep
 release notes about current behaviour, compatibility and limitations.
 
-## Initial publication
+## Publish a release
 
-Create an **empty** repository in your chosen GitHub account. Do not fork or
-change the visibility of a repository that contains personal development history.
-Do not add a GitHub-generated README or licence before pushing this initial tree.
-The prepared local repository has one root commit and no remote configured.
+Releases are published from the reviewed `main` branch of
+[jonathan-tipper/pendant-local](https://github.com/jonathan-tipper/pendant-local).
+Use a scoped work branch for preparation. Keep application/package version,
+changelog, installation links and validation evidence consistent. Preserve
+unrelated local edits by using a separate checkout when needed.
 
-Use the new repository URL, never a private development remote:
+Review passing Checks, Dependency audit and Secret scan runs for the exact
+release commit. An account/runner failure is not a passing code check. Never
+report a platform as tested merely because it appears in the matrix.
 
-```bash
-git remote add origin NEW_REPOSITORY_URL
-git push -u origin HEAD:main
-```
+Create an annotated version tag only after checks pass. Build the wheel and sdist
+from that commit, include a source ZIP made with `git archive`, and generate
+SHA-256 checksums for each uploaded asset. Verify package licences and install the
+wheel outside the source tree using temporary data. Do not include a development
+virtual environment, local configuration, models, recordings or credentials.
 
-Replace `NEW_REPOSITORY_URL` with your repository's actual clone URL. Review the
-result before sharing it. Set `main` as the default branch. In GitHub settings,
-enable private vulnerability reporting, secret scanning/push protection where
-available, Dependabot alerts and branch protection after CI has reported its
-check names. Confirm that Issues and Actions are enabled.
+Create a draft GitHub Release with explicit notes and the verified assets.
+Download the draft assets and compare their hashes before publishing. State
+compatibility limits and distinguish a Python/source release from a native app.
+Tag and publish only to this repository; the original development repository is
+not a release source and its visibility must not be changed.
 
-Publish a source tag only after the checks pass. State that downloaded speech
-weights and native installers are not included. Do not attach a working directory
-or an app bundle accidentally when uploading source archives.
+Keep private vulnerability reporting, secret scanning, push protection and
+Dependabot alerts enabled where available. Keep CI permissions read-only and
+review dependency updates rather than merging them automatically.
 
 ## Native app distribution
 
