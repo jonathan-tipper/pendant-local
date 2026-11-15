@@ -1,6 +1,6 @@
 # Release notes
 
-## 0.5.0
+## 0.5.0 · 22 September 2026
 
 Initial public source release of Pendant Local.
 
